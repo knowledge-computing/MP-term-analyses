@@ -6,4 +6,5 @@ from gensim.test.utils import datapath
 
 # FastText
 
+
 # Word2Vec
