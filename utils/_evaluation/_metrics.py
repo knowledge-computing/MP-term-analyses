@@ -1,22 +1,52 @@
 from Typing import List
 from sklearn.metrics import precision_score, recall_score
 
-def report_recall(list_true:list, list_pred:list) -> float:
+def report_recall(list_true:List[int], list_pred:List[int],
+                  bool_percentage:bool=True) -> float:
     """
+    Returns the recall score of model
+
+    Parameters
+    : list_true (List[int]): list of ground truth classes
+    : list_pred (List[int]): list of predicted classes
+    : bool_percentage (bool=True): true if return as percentage; false if return as decimal
+
+    Return
+    : recall_value (float): recall score 
+    """
+    recall_value = recall_score(y_true=list_true, y_pred=list_pred, zero_division=0)
+
+    if not bool_percentage:
+        return recall_value
     
+    return float(recall_value * 100)
+
+def report_precision(list_true:List[int], list_pred:List[int],
+                     bool_percentage:bool=True) -> float:
+    """
+    Returns the precision score of model
+
+    Parameters
+    : list_true (List[int]): list of ground truth classes
+    : list_pred (List[int]): list of predicted classes
+    : bool_percentage (bool=True): true if return as percentage; false if return as decimal
+
+    Return
+    : precision_value (float): precision score 
     """
 
-    return float(recall_score(y_true=list_true, y_pred=list_pred, zero_division=0) * 100)
+    precision_value = precision_score(y_true=list_true, y_pred=list_pred, zero_division=0)
 
-def report_precision(list_true:list, list_pred:list) -> float:
-    """
-
-    """
-    return float(precicion_score(y_true=list_true, y_pred=list_pred, zero_division=0) * 100)
+    if not bool_percentage:
+        return precision_value
+    
+    return float(precision_value * 100)
 
 def report_perplexity() -> float:
     """
     Used to measure the amount of bias in each language model
+
+    TODO
 
 
     """

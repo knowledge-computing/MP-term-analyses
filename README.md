@@ -13,3 +13,6 @@
 - [ ] Result display
     - [x] Table
     - [ ] Chart
+
+## Planned
+- [ ] Report perplexity of the language model
