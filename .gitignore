@@ -1,3 +1,4 @@
 data/
-papers/
+ground_truth/
+logs/
 utils/_data/models/
