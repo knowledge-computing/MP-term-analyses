@@ -7,9 +7,9 @@
     - [ ] Spacy
     - [ ] Flair
 - [ ] Few-shot TARS approach
-- [ ] Creating evaluation pipeline
-    - [ ] Report recall of identification pipeline
-    - [ ] Report precision of classification pipeline
+- [x] Creating evaluation pipeline
+    - [x] Report recall of identification pipeline
+    - [x] Report precision of classification pipeline
 - [ ] Result display
     - [x] Table
     - [ ] Chart
