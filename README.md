@@ -1,12 +1,15 @@
 ## In Progress
-- [] Data preparation pipeline for
-    - [] Spacy-based NER
-    - [] Flair-based NER
-    - [] Flair-based TARS
-- [] Entity recognition by
-    - [] Spacy
-    - [] Flair
-- [] Few-shot TARS approach
-- [] Creating evaluation pipeline
-    - [] Report recall of identification pipeline
-    - [] Report precision of classification pipeline
+- [ ] Data preparation pipeline for
+    - [ ] Spacy-based NER
+    - [ ] Flair-based NER
+    - [ ] Flair-based TARS
+- [ ] Entity recognition by
+    - [ ] Spacy
+    - [ ] Flair
+- [ ] Few-shot TARS approach
+- [ ] Creating evaluation pipeline
+    - [ ] Report recall of identification pipeline
+    - [ ] Report precision of classification pipeline
+- [ ] Result display
+    - [x] Table
+    - [ ] Chart
