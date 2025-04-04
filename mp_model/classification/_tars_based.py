@@ -2,12 +2,11 @@ from typing import List
 from flair.models import TARSClassifier
 from flair.trainers import ModelTrainer
 from flair.data import Corpus, Sentence
-from flair.datasets import ColumnCorpus
 
-# testing
-from flair.datasets import TREC_6
+def few_shot():
+    return 0
 
-def tars_classifier_zero(list_sentences:List[str]|str,
+def zero_shot(list_sentences:List[str]|str,
                          classes:List[str]|str,
                          model:str='tars-base') -> List[str]|str:
                          
