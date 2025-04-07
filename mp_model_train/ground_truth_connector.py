@@ -94,11 +94,25 @@ def tmp_connect(file_ground_truth:str,
     if not check_exist(folder_cov_path):
         raise ValueError(f"Path does not exist")
     
-    print(folder_cov_path)
     pl_gt = load_data(file_ground_truth).select(
         pl.col(['cov_text']),
         pl.col('image_ids').str.split(',')
-    ).drop_nulls('image_ids')
+    ).explode('image_ids').drop_nulls('image_ids').with_columns(
+        pl.concat_str([
+            pl.lit(folder_cov_path),
+            pl.col('image_ids')
+        ]).alias('data_path')
+    ).drop('image_ids').filter(
+        pl.col('data_path').map_elements(lambda x: check_exist(x), return_dtype=bool)
+    )
+
+
+    # TODO: check if the following works
+    pl_gt = pl_gt.with_columns(
+        actual_data = pl.col('data_path').map_elements(lambda x: load_data(x), return_dtype=str)
+    ).filter(
+        pl.col('actual_data').str.contains(pl.col('cov_text'))
+    )
 
     print(pl_gt)
     
