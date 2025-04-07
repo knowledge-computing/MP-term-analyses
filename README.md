@@ -1,3 +1,7 @@
+# Racial Terminology Identification & Racial Covenant Classification
+
+Mapping Prejudice project
+
 ## In Progress
 - [ ] Data preparation pipeline for
     - [ ] Spacy-based NER

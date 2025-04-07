@@ -101,6 +101,14 @@ class MpModel:
         # evaluation.result_table()
         pass
     
+    def retrain_model(self,
+                      training_data:str) -> None:
+        
+        model_directory = './mp_model/_model/'
+
+        
+        pass
+
     def save_data(self) -> None:
         data.save_data(dict_data=self.data,
                        bool_output_file=self.output_is_file,
