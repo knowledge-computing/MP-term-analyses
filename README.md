@@ -16,3 +16,5 @@
 
 ## Planned
 - [ ] Report perplexity of the language model
+- [ ] Add ANOVA calculation
+- [ ] Add TScore measurement

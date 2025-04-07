@@ -51,3 +51,26 @@ def report_perplexity() -> float:
 
     """
     return 0
+
+def report_tscore(alpha:float=0.05) -> float:
+    """
+    Used to measure the amount of bias in each language model
+
+    TODO
+
+
+    """
+    return 0
+
+def report_anova(alpha:float=0.05) -> float:
+    """
+    Analysis of variance (ANOVA): compare the means of two or more groups by analyzing variance
+    Used in: 
+
+    Equation: 
+
+    TODO
+
+
+    """
+    return 0
