@@ -1,4 +1,4 @@
 data/
 ground_truth/
 logs/
-utils/_data/models/
+mp_model/data/models/

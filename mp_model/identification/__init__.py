@@ -1,4 +1,6 @@
-from ._crs import crs2crs
+from ._term_recog import run_fuzzy
+from ._entity_recog import run_er
 
 __all__ = [
+
 ]

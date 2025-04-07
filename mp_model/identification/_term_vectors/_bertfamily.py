@@ -1,19 +1,4 @@
-from Typing import List
-
-from gensim.models.fasttext import FastText
-from gensim.test.utils import datapath
-
-# GloVe
-def glove_vectors(word:str=None) -> List[float]:
-    return 0
-
-# FastText
-def fastext_vectors(word:str=None) -> List[float]:
-    return 0
-
-# Word2Vec
-def word2vec_vectors(word:str=None) -> List[float]:
-    return 0
+from Typing import list
 
 # BERT Embeddings
 def bert_embeddings(word:str=None, sentence:str=None) -> List[float]:
