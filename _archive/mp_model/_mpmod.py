@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore", category=pl.MapWithoutReturnDtypeWarning)
 # warnings.filterwarnings("ignore", category=urllib3.InsecureRequestWarning)
 urllib3.disable_warnings()
 
-from mp_model import data, classification, identification, evaluation, preprocess
+from mp_model import data, correction, classification, identification, evaluation, preprocess
 
 from mp_model._utils import (
     DefaultLogger,
@@ -84,6 +84,12 @@ class MpModel:
 
             if data.check_directory_path(self.output_path) == 0:
                 logger.info(f"Created output directory: {self.output_path}")
+
+    def ocr_correction(self) -> None:
+        # TODO: run preprocessing
+        
+        if self.ocr_method == 'bart_basic':
+            self.data = correction.ocr_bart_basic(self.data)
 
     def run_identification(self,
                            method: str='er') -> None:

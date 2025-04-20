@@ -37,7 +37,7 @@ class MpModelTrainer:
             logger.set_level('WARNING')
 
     def format_gt(self,) -> None:
-        folder_cov_path = os.path.join(self.dir_txt_files, data.get_cov_path(self.file_gt))
+        folder_cov_path = os.path.join(self.dir_txt_files, data.get_cov_path(self.file_gt)) + '/'
 
         if not data.check_exist(folder_cov_path):
             logger.error(f"Data path does not exist: {folder_cov_path}.\nAborting")
@@ -54,7 +54,8 @@ class MpModelTrainer:
         self.gt_data = self.gt_data.with_columns(
             pl.concat_str([
                 pl.lit(folder_cov_path),
-                pl.col('image_ids')
+                pl.col('image_ids'),
+                pl.lit('.txt')
             ]).alias('data_path')
         ).drop('image_ids')
         
@@ -64,9 +65,16 @@ class MpModelTrainer:
         )
         logger.info(f"Found {self.gt_data.shape[0]} files listed in ground truth file {self.file_gt}.")
 
-        # Load the actual content of the files
+        # Load the actual content of the files (file_name:str, cov_text:str, data_path:list, actual_data:list)
         self.gt_data = self.gt_data.with_columns(
-            actual_data = pl.col('data_path').map_elements(lambda x: load_data(x), return_dtype=str)
-        ).filter(
-            pl.col('actual_data').str.contains(pl.col('cov_text'))
+            actual_data = pl.col('data_path').map_elements(lambda x: load_data(x), return_dtype=str),
+            file_name = pl.col('data_path') \
+                .str.split('/').list.get(-1) \
+                .str.split('_SPLITPAGE_').list.first() \
+                .str.split('.txt').list.first()
+        ).group_by('file_name').agg([pl.all()]).with_columns(
+            pl.col('cov_text').list.first()
         )
+
+    def ocr_correction():
+        return 0
