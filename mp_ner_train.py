@@ -13,17 +13,6 @@ from transformers import (BertTokenizerFast, AutoTokenizer, AutoModelForTokenCla
                           TrainingArguments, Trainer)
 import evaluate
 
-# def create_dataset():
-#     dataset = load_dataset('csv', data_files={'train': 'train.txt', 'validation': 'val.txt', 'test': 'test.txt'}, sep=",", 
-#                                 names=["text", "tokens", "ner_tags"])
-#     labels = df['label'].unique().tolist()
-#     ClassLabels = ClassLabel(num_classes=len(labels), names=labels)
-    
-
-#     dataset.class_encode_column('ner_tags')
-
-#     return 0
-
 def split_data(df_data:Union[pl.DataFrame, pd.DataFrame],
                split_ratio:Dict[str, float],
                dir_output:str, class_col:str=None) -> None:

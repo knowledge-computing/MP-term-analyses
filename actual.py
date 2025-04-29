@@ -28,13 +28,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def print_gpu_utilization() -> None:
     """
     Print current GPU utilization stat
-
-    Parameters
-    : None
     
-    Return
-    : None
-
     Terminal Output
     : Current GPU utilization in MB
     """

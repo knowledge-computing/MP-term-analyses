@@ -1,0 +1,40 @@
+,text,tokens,ner_identified,test
+0,negro descent .,['negro'],[],0
+1,Caucasian,['Caucasian'],[],0
+2,agree that no person belonging to any race except the Caucasian,['Caucasian'],[],0
+3,bred Dollars ( $ 15 00 ) exclusive of decerating no mearo on person of african des cent no chinese or g panese,['african' 'chinese'],[],0
+4,"sold , transferred , conveyed , rented or occupied by negroes , or",['negroes'],[],0
+5,pers of the negro descent .,['negro' 'descent'],[],0
+6,agree that no person belonging to any race except the Caucasian,['Caucasian'],[],0
+7,"by any person not of the Caucasian race , except for casual domestic servants ,",['Caucasian' 'domestic' 'servants'],[],0
+8,"Subject to building and racial restrictions of record , and",['racial'],[],0
+9,no person belonging to any race except the Caucasian shall purchase,['Caucasian'],[],0
+10,agree that no person belonging to any race except the Caucasian,['Caucasian'],[],0
+11,"ferred or conveyed to , nor shall the same be occupied exclusively by any negno or colored",['colored'],[],0
+12,Subject to building and racial restrictions if any .,['racial'],[],0
+13,Subject to building and racial restrictions if any .,['racial'],[],0
+14,"or any part , thereof be assigned to any person not of the Caucasian",['Caucasian'],[],0
+15,"person not of the Caucasian race , except for casual domestic servants .",['Caucasian' 'domestic' 'servants'],[],0
+16,"Subject to building and racial restrictions of record ,",['racial'],[],0
+17,person not of the white or caucasion race .,['caucasion'],['white' 'cauc'],0
+18,"Subject to building and racial restrictions of record ,",['racial'],[],0
+19,agree that no person belonging to any race except the Caucasian,['Caucasian'],[],0
+20,"Subject to building and racial restrictions of record , if any .",['racial'],[],0
+21,"No part or any part thereof shall be sold or conveyed to , or used or occupied by any person not of the Caucasian",['Caucasian'],[],0
+22,race except the Caucasian shall pruchase or occupy the eforesaid premises or any,['Caucasian'],[],0
+23,"not of the Caucasian race , except for casual domestic servants .",['Caucasian' 'domestic' 'servants'],[],0
+24,by negroes or persons of Negro descent .,['Negro'],[],0
+25,Caucasian,['Caucasian'],[],0
+26,agree that no person belonging to any race except the Caucasian,['Caucasian'],[],0
+27,agree that no person belonging to any race except the Caucasian,['Caucasian'],[],0
+28,Caucasian,['Caucasian'],[],0
+29,"Subject to building and racial restrictions of record , also subject to a mortgage to TWIN CITY FEDERAL",['racial'],[],0
+30,"ferred or conveyed to , nor shall the same be occupied exclusively by any-negro or colored",['colored'],[],0
+31,order to make the contour thereof conform 78 the owner Ideas and no person or persons other than of the Caucasian,['Caucasian'],[],0
+32,Subject to building and racial restrictions of record .,['racial'],[],0
+33,"not of the White or Caucasian race , except those who may be serving as domestic help for the owner or tenant",['Caucasian'],[],0
+34,any race except the Caucasian shall purchase or occupy the aforesaid premises OF,['Caucasian'],[],0
+35,said lot shall never be occupied by a colored person or persons It is,['colored'],[],0
+36,the Caucasian race shall be per-,['Caucasian'],[],0
+37,"premises to arm megro , or person of african descent nor . to any chenese or Japanese person .",['african' 'Japanese'],[],0
+38,Caucasian,['Caucasian'],[],0

@@ -2,23 +2,23 @@
 
 Mapping Prejudice project
 
-## In Progress
-- [ ] Data preparation pipeline for
-    - [ ] Spacy-based NER
-    - [ ] Flair-based NER
-    - [ ] Flair-based TARS
-- [ ] Entity recognition by
-    - [ ] Spacy
-    - [ ] Flair
-- [ ] Few-shot TARS approach
-- [x] Creating evaluation pipeline
-    - [x] Report recall of identification pipeline
-    - [x] Report precision of classification pipeline
-- [ ] Result display
-    - [x] Table
-    - [ ] Chart
+## To Do
+Keys:
+- (TID) Work related to racial term identification
+- (DCL) Works related to document classification
+- (OCR) Work relevant with OCR correction -> lowest priority
 
-## Planned
-- [ ] Report perplexity of the language model
-- [ ] Add ANOVA calculation
-- [ ] Add TScore measurement
+### In Progress
+- [ ] (TID) Create pipeline that will convert CSV files to HF Dataset
+    - [ ] (TID) Tokenization
+    - [ ] (TID) NER tagging with Class labels
+
+### Up Next
+- [ ] (DCL) Try TARS few-shot
+    - [ ] (DCL) Measure maximum context window
+    - [ ] (DCL) Measure maximum context window of data
+- [ ] (OCR) Measure maximum context window of BART based OCR correction
+- [ ] (OCR) Test accuracy of OCR correction (use GitHub data and original data)
+
+### Completed
+- [x] (TID) Create NER training pipeline using ModernBERT

@@ -4,8 +4,8 @@ another race,,1,,,'another race',
 armenian,,1,,,'armenian',
 aryan,$b,0,,,'aryan',"Maryanne', 'Bryan', 'Ryan'"
 asiatic,,1,,,'asiatic',
-black race,,1,,,'black race',
-brown race,,1,,,'brown race',
+black,,1,,,'black race',
+brown,,1,,,'brown race',
 caucasian,$b,3,,," caucasian', ' caucasian ', 'cau-casian', 'caucasion', 'cau-casion', 'cauca-sion', 'caucausian', 'caucasin', 'aucasian', 'caboasian', 'can-casia', 'cancasian', 'capcasian', 'caticasian', 'cau casian', 'cauc- asia', 'caucã¡sian', 'caucagian', 'caucaison', 'caucasia', 'caucasiã¡n', 'caucasiã¤n', 'caucasiar', 'caucasiari', 'caucasien', 'caucasioan', 'caucasisian', 'caucasism', 'caucassian', 'caucastan', 'caucastian', 'cauccasian', 'cauccian', 'caucesian', 'caudasian', 'caueasian', 'caugasian', 'cauoasian', 'causas ian', 'causcasian', 'caussian', 'concasion', 'coucasion', 'daucasi', 'daucasian', 'daucasion', 'gaucasian', 'gaucasion', 'saucasian', 'vaucasian', 'gaucasian cage', 'caueasien rage', 'casian', '-casian'","concession', 'gaucas', 'cã¡ugasiah rage'"
 chinese,$b,1,,,'chinese',
 citizen,,1,TRUE,bad_solo,'citizen',
@@ -13,10 +13,10 @@ colored,$b,1,,,"colored', 'c olored', 'cblored'",State of Colorado'
 descent,$b,1,TRUE,bad_solo,"descent', 'decent'",
 different race,$b,0,,,'different race',"different rate,different rates'"
 disorderly persons,,1,TRUE,ca_non_racial,'disorderly persons',
-domestic servants,,1,,,'domestic servants',
-domestics,$b,0,,,'domestics',"domestic animals', 'domestic purposes'"
+domestic servant,,1,,,'domestic servants',
+domestic,$b,0,,,'domestics',"domestic animals', 'domestic purposes'"
 employed by white,,1,,,'employed by white',
-ethiopian,,1,,,'ethiopian',
+ethiopian,,1,,,'ethiopian'
 filipino,,1,,,'filipino',
 gentile,$b,0,,,'gentile',gentle'
 hawaiian,,1,,,'hawaiian',
@@ -29,6 +29,7 @@ italian,$b,1,,,'italian',
 japanese,,1,,,'japanese',
 jew,$b,0,,,'jew',new'
 jewish,$b,1,,,'jewish',
+less than 18 years,$b,1,TRUE,ca_non_racial,'less than 18 years',
 lineage,$b,1,,,'lineage',
 lineal descendant,$b,1,,,'lineal descendant',
 lineal descent,$b,1,,,'lineal descent',
@@ -42,10 +43,8 @@ mulato,$b,1,,,'mulato',
 muslim,$b,1,,,'muslim',
 nigger,$b,0,,,'nigger',
 native,$b,0,,,'native',
-nationality,$b,1,TRUE,bad_solo,'nationality',
 not white,$b,0,,,people who are not white.',do not write above this line'
 negro,$b,1,,,negro',"negotiated by', 'negotiable', 'NETROPOLITAN', 'a distance of 762.5 feet to a point on or near the center line of a township', 'neirs', 'Metro Title Corporation', 'near'"
-negroes,$b,1,,,"negroes', 'given to negroes'","negotiated by', 'negotiable', 'NETROPOLITAN', 'a distance of 762.5 feet to a point on or near the center line of a township'"
 negroid,$b,1,,,negroid',"negotiated by', 'negotiable', 'NETROPOLITAN', 'a distance of 762.5 feet to a point on or near the center line of a township'"
 no children,,1,TRUE,ca_non_racial,'no children',
 no minor,,1,TRUE,ca_non_racial,'no minor',
@@ -56,20 +55,20 @@ persian,$b,1,,,'persian',"person', 'persuant'"
 philippine,,1,,,'philippine',
 polish,$b,1,TRUE,bad_solo,'polish',PUOLISHING'
 poverty,$b,0,TRUE,ca_non_racial,'poverty',property'
+race,,1,,,'race only',
 racial,$b,1,TRUE,bad_solo,'racial',"Rachel', 'Rachala'"
 report of transfer,,1,TRUE,mil_discharge,'report of transfer',
 report of separation,,1,TRUE,mil_discharge,'report of separation',
 transfer or discharge,,1,TRUE,mil_discharge,'transfer or discharge',
 blood group,,1,TRUE,mil_discharge,'blood group',
+blood,,1,TRUE,mil_discharge,'blood group',
 semites,$b,1,,,'semites',
 semitic,$b,1,,,"semetic', 'semitic', 'simitic'",
-servant,,1,TRUE,bad_solo,'servant',
+servant,,1,TRUE,bad_solo,'servant'
 squaw,$b,0,,,'squaw',"square', 'in Square No.', 'squad'"
-such races,,0,,,'such races',such rates'
 syrian,$b,1,,,'syrian',
 turkish,$b,1,,,'turkish',furnished'
-under the age of,,1,TRUE,ca_non_racial,'under the age of',
-white person,,1,,,'white person',
-white race,,1,,,'white race',
+under the age of,,1,TRUE,ca_non_racial,'under the age of'
+white,$b,1,TRUE,bad_solo,'white or',"whole or', 'GUY WHITEFORD', 'White Granite'"
 years of age or older,,1,TRUE,ca_non_racial,'years of age or older',
-yellow race,,1,,,'yellow race',
+yellow,,1,,,'yellow',
