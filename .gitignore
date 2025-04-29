@@ -1,3 +1,5 @@
+_archive/
 data/
-papers/
-utils/_data/models/
+ground_truth/
+logs/
+utils/
