@@ -6,6 +6,12 @@ def main(path_data:str,
     
     mpterm = MPTerm(path_data=path_data,
                     dir_output=dir_output, file_output=file_output)
+    
+    # Load data to variables
+    mpterm.load_data()
+
+    # Run entity recogntiion
+    mpterm.entity_recog()
 
     # Save output
     mpterm.save_output()
