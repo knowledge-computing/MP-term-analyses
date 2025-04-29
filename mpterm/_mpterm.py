@@ -63,6 +63,9 @@ class MPTerm:
         ner_model_abspath = os.path.abspath(ner_model_path)
         self.ner_pipeline = entity_recognizer.load_model(ner_model_abspath)
 
+        # TODO: need to complete this part
+        # Call entity_recognizer run ner model
+        # Call select entities
         self.detected_ner = {}
 
         return 0

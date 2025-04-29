@@ -18,6 +18,12 @@ def load_model(model_path:str):
 
     return ner_pipeline
 
+def run_nermodel(ner_pipeline,
+                 input_sentence:str):
+    ner_results = ner_pipeline(input_sentence)
+
+    return ner_results
+
 # model_fine_tuned = AutoModelForTokenClassification.from_pretrained(OUTPUT_MODEL)
 #     tokenizer = DistilBertTokenizerFast.from_pretrained(OUTPUT_MODEL)
 
