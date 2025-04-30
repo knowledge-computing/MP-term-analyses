@@ -1,3 +1,5 @@
+from typing import Union, List, Dict, Tuple
+
 from transformers import pipeline
 from transformers import BertTokenizerFast, DistilBertTokenizerFast 
 from transformers import AutoModelForTokenClassification 
@@ -19,12 +21,16 @@ def load_model(model_path:str):
     return ner_pipeline
 
 def run_nermodel(ner_pipeline,
-                 input_sentence:str):
-    ner_results = ner_pipeline(input_sentence)
+                 input_sentence:Union[str, List[str]]) -> Union[str, List[str]]:
+    
+    list_output = {}
+    if not isinstance(input_sentence, list):
+        list_input = [input_sentence]
+    else:
+        list_input = input_sentence
 
-    return ner_results
-
-# model_fine_tuned = AutoModelForTokenClassification.from_pretrained(OUTPUT_MODEL)
-#     tokenizer = DistilBertTokenizerFast.from_pretrained(OUTPUT_MODEL)
-
-#     nlp = pipeline("ner", model=model_fine_tuned, tokenizer=tokenizer, aggregation_strategy="simple", device=0)
+    for res in list_input:
+        ner_results = ner_pipeline(res)
+        list_output[res] = ner_results
+    
+    return list_output
