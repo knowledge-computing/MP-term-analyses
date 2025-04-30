@@ -63,9 +63,13 @@ class MPTerm:
         ner_model_abspath = os.path.abspath(ner_model_path)
         self.ner_pipeline = entity_recognizer.load_model(ner_model_abspath)
 
-        self.detected_ner = {}
+        # Running entity recognizer model
+        ner_result = entity_recognizer.run_nermodel(ner_pipeline=self.ner_pipeline,
+                                                    input_sentence=self.list_sentences)
+        # Clean NER entitites
+        self.detected_ner = entity_recognizer.select_entities(ner_results=ner_result)
 
-        return 0
+        # TODO: format to few tokens: token or token : [few tokens]
 
     def save_output(self,
                     save_format: str='json') -> None:
