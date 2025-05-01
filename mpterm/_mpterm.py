@@ -1,5 +1,7 @@
 import os
 import warnings
+from typing import Union, Dict
+
 import polars as pl
 from polars.exceptions import MapWithoutReturnDtypeWarning
 from datetime import datetime, timezone
@@ -34,7 +36,8 @@ class MPTerm:
         else:
             logger.set_level('WARNING')
 
-    def load_data(self):
+    def load_data(self,
+                  data_info:Union[Dict[str, str], None]):
         int_existence = data.check_exists(self.path_data)
         if int_existence == -1:
             logger.error(f"File {self.path_data} does not exist")
@@ -47,8 +50,11 @@ class MPTerm:
         self.list_sentences = processing.to_sentence(input_strs=self.list_lines, 
                                                         bool_ocr_correct=self.bool_ocr_correct)
         
-        # TODO: complete getting the data_info
-        self.data_info = {}
+        if not data_info:
+            workflow, lookup = processing.get_components(self.path_data)
+            self.data_info = {'workflow': workflow, 'lookup': lookup, 'uuid': 'NONE'}
+        else:
+            self.data_info = data_info
 
     def entity_recog(self, ner_model_path:str=None):
         if not ner_model_path :
@@ -68,6 +74,8 @@ class MPTerm:
                                                     input_sentence=self.list_sentences)
         # Clean NER entitites
         self.detected_ner = entity_recognizer.select_entities(ner_results=ner_result)
+
+        print(self.detected_ner)
 
         # TODO: format to few tokens: token or token : [few tokens]
 
