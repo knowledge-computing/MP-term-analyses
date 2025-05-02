@@ -3,7 +3,7 @@ from typing import Union, List, Dict, Tuple
 def select_entities(ner_results:dict, min_score:float=0.1) -> Dict[str, List[str]]:
     cleaned_ner = {}
 
-    for sentence, tmp_ners in ner_results:
+    for sentence, tmp_ners in ner_results.items():
         grouped_entities = []
         current_entity = None
 
