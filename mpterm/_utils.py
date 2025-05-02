@@ -4,7 +4,7 @@ from typing import List, Dict
 from datetime import datetime
 
 import polars as pl
-from procmine import data, converting
+from mpterm import data
 
 class DefaultLogger:
     def __init__(self):
