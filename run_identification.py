@@ -25,7 +25,7 @@ if __name__ == '__main__':
     parser.add_argument('--output_dir', default='./output',
                         help='Directory of output')
     
-    parser.add_argument('--output_filename', required=True
+    parser.add_argument('--output_file', required=True,
                         help='Filename of output')
     
     args = parser.parse_args()

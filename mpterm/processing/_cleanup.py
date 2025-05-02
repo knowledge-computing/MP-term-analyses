@@ -2,6 +2,22 @@ import os
 import json
 from typing import Union, List, Dict, Tuple
 
+def get_components(path_file:str) -> Tuple[str]:
+    """
+    
+    """
+    list_components = path_file.split('/')
+    workflow = ''
+
+    for i in list_components:
+        if '-county' in i:
+            workflow = i
+
+    lookup = path_file.split(workflow)[1]
+    lookup, _ = os.path.splitext(lookup)
+
+    return workflow, lookup
+
 def format_output(dict_ners:Dict[str, List[int]], list_org_lines:List[str],
                   dict_info: Dict[str, str],) -> dict:
     """
