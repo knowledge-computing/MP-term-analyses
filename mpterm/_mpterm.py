@@ -14,6 +14,7 @@ from mpterm import data, processing, entity_recognizer
 
 from mpterm._utils import (
     DefaultLogger,
+    str_to_json_extracted
 )
 
 logger = DefaultLogger()
@@ -21,15 +22,17 @@ logger.configure("INFO")
 
 class MPTerm:
     def __init__(self,
-                 path_data: str,
+                 input_info: Union[str, dict],
                  dir_output:str=None,
                  file_output:str=None,
                  verbose: bool=False) -> None:
         
-        self.path_data = path_data
         self.dir_output = dir_output
         self.file_output = file_output
         self.bool_ocr_correct = False
+
+        # Need to setup for case where bool_local is true
+        self.path_data, self.uuid = str_to_json_extracted(input_info)
 
         if verbose:
             logger.set_level('DEBUG')
@@ -37,24 +40,30 @@ class MPTerm:
             logger.set_level('WARNING')
 
     def load_data(self,
-                  data_info:Dict[str, str]=None):
-        int_existence = data.check_exist(self.path_data)
-        if int_existence == -1:
-            logger.error(f"File {self.path_data} does not exist")
-            raise ValueError(f"File {self.path_data} does not exist",
-                              "Ending program")
+                  bool_local:bool=False):
+        """
 
-        self.list_lines = data.load_data(self.path_data)
+        """
+        updated_path, workflow, lookup = processing.get_components(self.path_data)
+        self.data_info = {'workflow': workflow, 'lookup': lookup, 'uuid': self.uuid}
+
+        if bool_local:
+            int_existence = data.check_exist(self.path_data)
+            if int_existence == -1:
+                logger.error(f"File {self.path_data} does not exist")
+                raise ValueError(f"File {self.path_data} does not exist",
+                                "Ending program")
+
+            self.list_lines = data.load_local_data(self.path_data)
+        else:
+            self.list_lines = data.load_boto(updated_path)
         logger.info(f"File {self.path_data} loaded\nTotal of {len(self.list_lines)} lines")
 
         self.list_sentences = processing.to_sentence(input_strs=self.list_lines, 
-                                                        bool_ocr_correct=self.bool_ocr_correct)
+                                                     bool_ocr_correct=self.bool_ocr_correct)
         
-        if not data_info:
-            workflow, lookup = processing.get_components(self.path_data)
-            self.data_info = {'workflow': workflow, 'lookup': lookup, 'uuid': 'NONE'}
-        else:
-            self.data_info = data_info
+        self.dict_line_num = processing.get_line_num(list_sentences=self.list_sentences,
+                                                     list_lines=self.list_lines)
 
     def entity_recog(self, ner_model_path:str=None):
         if not ner_model_path :
@@ -74,19 +83,19 @@ class MPTerm:
                                                     input_sentence=self.list_sentences)
         
         # Clean NER entitites
-        detected_ner = entity_recognizer.select_entities(ner_results=ner_result)
+        detected_ner_p_sentence = entity_recognizer.select_entities(ner_results=ner_result)
 
-        # TODO: Checked working up to here
-        # TODO: format to few tokens: token or token : [few tokens]
-        self.detected_ner = entity_recognizer.convert_entities_format(detected_ner)
+        # Identifying location of NER on actual line_list
+        self.detected_ner = entity_recognizer.convert_entities_format(detected_ner_p_sentence, self.dict_line_num)
 
+        # Format output to Zooniverse output format
+        self.dict_output = processing.format_output(dict_ners=self.detected_ner, 
+                                                    dict_line_num=self.dict_line_num, 
+                                                    list_lines=self.list_lines,
+                                                    dict_info=self.data_info)
 
     def save_output(self,
                     save_format: str='json') -> None:
-        
-        dict_output = processing.format_output(dict_ners=self.detected_ner, list_org_lines=self.list_lines,
-                                               dict_info=self.data_info)
-        
         # Check if directory path exists
         int_existence = data.check_directory_path(path_directory=self.dir_output)
         if int_existence == 0:
@@ -96,5 +105,12 @@ class MPTerm:
 
         self.path_output = os.path.join(self.dir_output, f'{self.file_output}.json')
 
-        data.save_file(output_data=dict_output, save_path=self.path_output)
+        data.save_file(output_data=self.dict_output, save_path=self.path_output)
         logger.info(f"Output saved to {self.path_output}")
+
+    def return_output(self) -> dict:
+        """
+        Returns JSON output of form:
+        """
+
+        return self.dict_output
