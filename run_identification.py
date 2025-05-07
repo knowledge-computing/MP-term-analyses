@@ -20,7 +20,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Mapping Prejudice')
 
     parser.add_argument('--path_data', required=True,
-                        help='Directory or file where the mineral site database is located')
+                        help='Path to the deed document')
     
     parser.add_argument('--output_dir', default='./output',
                         help='Directory of output')

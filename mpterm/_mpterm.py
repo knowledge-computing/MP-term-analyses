@@ -74,10 +74,12 @@ class MPTerm:
                                                     input_sentence=self.list_sentences)
         
         # Clean NER entitites
-        self.detected_ner = entity_recognizer.select_entities(ner_results=ner_result)
+        detected_ner = entity_recognizer.select_entities(ner_results=ner_result)
 
         # TODO: Checked working up to here
         # TODO: format to few tokens: token or token : [few tokens]
+        self.detected_ner = entity_recognizer.convert_entities_format(detected_ner)
+
 
     def save_output(self,
                     save_format: str='json') -> None:
