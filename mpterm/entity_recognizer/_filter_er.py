@@ -1,4 +1,5 @@
 from typing import Union, List, Dict, Tuple
+import polars
 
 def select_entities(ner_results:dict, min_score:float=0.1) -> Dict[str, List[str]]:
     cleaned_ner = {}
@@ -45,5 +46,19 @@ def select_entities(ner_results:dict, min_score:float=0.1) -> Dict[str, List[str
 
     return cleaned_ner
 
-def convert_entities_format():
-    return 0
+def convert_entities_format(ner_result:Dict[str, List[str]]):
+    """
+    
+    """
+    print(ner_result)
+
+    formatted_output = {}
+
+    for idx, (k, v) in enumerate(ner_result.items()):
+        for term in v:
+            try: formatted_output[term].append(idx)
+            except: formatted_output[term] = [idx]
+
+    print(formatted_output)
+
+    return formatted_output
