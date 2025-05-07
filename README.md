@@ -1,4 +1,5 @@
 # (In Progress) Mapping Prejudice: Racial Term Identification from Historical Deed Documents
+Test Branch
 
 ## TODO: COMPONENTS TO CHECK
 - [ ] class init with local data
