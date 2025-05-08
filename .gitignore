@@ -1,5 +1,5 @@
 _archive/
-data/
 ground_truth/
 logs/
-utils/
+s3_data/
+*/__pycache__/

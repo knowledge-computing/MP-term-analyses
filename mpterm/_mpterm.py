@@ -40,9 +40,12 @@ class MPTerm:
             logger.set_level('WARNING')
 
     def load_data(self,
-                  bool_local:bool=False):
+                  bool_local:bool=False) -> None:
         """
+        Creating data information dictionary and loading the actual data
 
+        Argument
+        : bool_local (bool) - (optional) Using local data
         """
         updated_path, workflow, lookup = processing.get_components(self.path_data)
         self.data_info = {'workflow': workflow, 'lookup': lookup, 'uuid': self.uuid}
@@ -56,16 +59,25 @@ class MPTerm:
 
             self.list_lines = data.load_local_data(self.path_data)
         else:
-            self.list_lines = data.load_boto(updated_path)
+            self.list_lines = data.load_boto_data(updated_path)
         logger.info(f"File {self.path_data} loaded\nTotal of {len(self.list_lines)} lines")
 
+        # Converting list of lines to sentences
         self.list_sentences = processing.to_sentence(input_strs=self.list_lines, 
                                                      bool_ocr_correct=self.bool_ocr_correct)
-        
+
+        # Identifying beginning and end of line of each sentences
         self.dict_line_num = processing.get_line_num(list_sentences=self.list_sentences,
                                                      list_lines=self.list_lines)
 
-    def entity_recog(self, ner_model_path:str=None):
+    def entity_recog(self, 
+                     ner_model_path:str=None) -> None:
+        """
+        Main model running entity recognition
+
+        Argument
+        : ner_model_path (str) - (optional) User defined ner model path
+        """
         if not ner_model_path :
             ner_model_path = './mpterm/_model/default'
 
@@ -85,17 +97,16 @@ class MPTerm:
         # Clean NER entitites
         detected_ner_p_sentence = entity_recognizer.select_entities(ner_results=ner_result)
 
-        # Identifying location of NER on actual line_list
-        self.detected_ner = entity_recognizer.convert_entities_format(detected_ner_p_sentence, self.dict_line_num)
-
         # Format output to Zooniverse output format
-        self.dict_output = processing.format_output(dict_ners=self.detected_ner, 
+        self.dict_output = processing.format_output(dict_ners=detected_ner_p_sentence, 
                                                     dict_line_num=self.dict_line_num, 
                                                     list_lines=self.list_lines,
                                                     dict_info=self.data_info)
 
-    def save_output(self,
-                    save_format: str='json') -> None:
+    def save_output(self,) -> None:
+        """
+        Saves zooniverse output to user defined path
+        """
         # Check if directory path exists
         int_existence = data.check_directory_path(path_directory=self.dir_output)
         if int_existence == 0:
@@ -105,12 +116,12 @@ class MPTerm:
 
         self.path_output = os.path.join(self.dir_output, f'{self.file_output}.json')
 
-        data.save_file(output_data=self.dict_output, save_path=self.path_output)
+        data.save_file(output_data=self.dict_output, path_save=self.path_output)
         logger.info(f"Output saved to {self.path_output}")
 
-    def return_output(self) -> dict:
+    def return_output(self,) -> dict:
         """
-        Returns JSON output of form:
+        Returns zooniverse output
         """
 
         return self.dict_output

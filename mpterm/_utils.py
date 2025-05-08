@@ -54,12 +54,13 @@ def str_to_json_extracted(input_unk_info):
     data_path = 'UNK'
     uuid = 'NONE'
     if isinstance(input_unk_info, str):
-        input_unk_info = json.loads(input_unk_info)
+        try: input_unk_info = json.loads(input_unk_info)
+        except: pass
 
     if isinstance(input_unk_info, dict):
         try: 
-            data_path = input_unk_info['ocr_json']
-            uuid = input_unk_info['uuid']
+            data_path = input_unk_info['body']['ocr_json']
+            uuid = input_unk_info['body']['uuid']
         except: pass
     else:
         data_path = input_unk_info
