@@ -1,7 +1,16 @@
-from typing import Union, List, Dict, Tuple
-import polars
+from typing import List, Dict
 
 def select_entities(ner_results:dict, min_score:float=0.1) -> Dict[str, List[str]]:
+    """
+    Converts tokens back into word-level and filters entities to report based on score
+
+    Parameters
+    : ner_results (dict): score for all tokens in sentence
+    : min_score (min_score): (optional) minimum confidence score; default=0.1
+
+    Return
+    : cleaned_ner (Dict[str, List[str]]): selected entity per sentence
+    """
     cleaned_ner = {}
 
     for sentence, tmp_ners in ner_results.items():
@@ -45,20 +54,3 @@ def select_entities(ner_results:dict, min_score:float=0.1) -> Dict[str, List[str
         cleaned_ner[sentence] = grouped_entities
 
     return cleaned_ner
-
-def convert_entities_format(ner_result:Dict[str, List[str]]):
-    """
-    
-    """
-    print(ner_result)
-
-    formatted_output = {}
-
-    for idx, (k, v) in enumerate(ner_result.items()):
-        for term in v:
-            try: formatted_output[term].append(idx)
-            except: formatted_output[term] = [idx]
-
-    print(formatted_output)
-
-    return formatted_output
