@@ -85,9 +85,8 @@ def get_line_num(list_sentences:List[str],
 
     return dict_line_num
 
-def format_output(dict_ners:Dict[str, List[str]], 
-                  dict_line_num: Dict[str, List[int]], list_lines: List[str],
-                  dict_info: Dict[str, str],) -> dict:
+def format_entities(dict_ners:Dict[str, List[str]], 
+                    dict_line_num: Dict[str, List[int]], list_lines: List[str]) -> dict:
     """
     Formats the output such that it matches the Zooniverse output format:
     Expected: {term: [lines], workflow: str, lookup: str, uuid: str}
@@ -120,6 +119,32 @@ def format_output(dict_ners:Dict[str, List[str]],
                         except: zooniverse_output[ner] = [cur_idx]
 
     if bool_entity_recognized:
+        return zooniverse_output
+
+    else:
+        return {}
+
+def format_output(dict_ners:Dict[str, List[str]], 
+                  dict_line_num: Dict[str, List[int]], list_lines: List[str],
+                  dict_info: Dict[str, str],) -> dict:
+    """
+    Formats the output such that it matches the Zooniverse output format:
+    Expected: {term: [lines], workflow: str, lookup: str, uuid: str}
+
+    Parameters
+    : dict_ners (Dict[str, List[str]]): racial entities per each sentence
+    : dict_line_num (Dict[str, List[int]]): sentence mapped to start and end line number
+    : list_lines (List[str]): Original document in string format
+    : dict_info (Dict[str, str]): workflow, lookup, and uuid information
+
+    Return
+    zooniverse_output (dict): entity formatted in form of zooniverse output
+    """
+    zooniverse_output = format_entities(dict_ners=dict_ners,
+                                        dict_line_num=dict_line_num,
+                                        list_lines=list_lines)
+
+    if len(zooniverse_output) > 0:
         # Appending the defaults
         zooniverse_output.update(dict_info)
 
