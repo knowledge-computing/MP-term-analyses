@@ -63,8 +63,7 @@ class MPTerm:
         logger.info(f"File {self.path_data} loaded\nTotal of {len(self.list_lines)} lines")
 
         # Converting list of lines to sentences
-        self.list_sentences = processing.to_sentence(input_strs=self.list_lines, 
-                                                     bool_ocr_correct=self.bool_ocr_correct)
+        self.list_sentences = processing.to_sentence(input_strs=self.list_lines)
 
         # Identifying beginning and end of line of each sentences
         self.dict_line_num = processing.get_line_num(list_sentences=self.list_sentences,
