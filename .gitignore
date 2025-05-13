@@ -3,3 +3,4 @@ ground_truth/
 logs/
 mp_model/data/models/
 _archive/
+s3_data/

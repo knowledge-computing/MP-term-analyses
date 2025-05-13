@@ -11,7 +11,19 @@ def split_str_list(str_list, type_num:bool=False):
 
     return list_list
 
-with open('/home/yaoyi/pyo00005/Mapping_Prejudice/logs/regular/anoka.pkl', 'rb') as handle:
+def group_classify(bool_gt, bool_identified):
+    if bool_gt and bool_identified:
+        return 'TP'
+    if (not bool_gt) and (not bool_identified):
+        return 'TN'
+    
+    if (not bool_gt) and bool_identified:
+        return 'FP'
+    
+    if bool_gt and (not bool_identified):
+        return 'FN'
+
+with open('/home/yaoyi/pyo00005/Mapping_Prejudice/logs/regular/washington.pkl', 'rb') as handle:
     pl_data = pickle.load(handle)
 
 pl_data = pl_data.with_columns(
@@ -20,16 +32,31 @@ pl_data = pl_data.with_columns(
     pl.col('prefix_tags').map_elements(lambda x: split_str_list(x, True)),
 )
 
+pl_data = pl_data.with_columns(
+    ground_truth = pl.col('prefix_tags').list.contains('1'),
+    identified = (pl.col('ner_identified').list.len() > 0),
+    total_tokens = pl.col('prefix_tags').list.len()
+).with_columns(
+    output_type = pl.struct(pl.all()).map_elements(lambda x: group_classify(x['ground_truth'], x['identified']))
+)
+
+print(pl_data.select(pl.sum('total_tokens')))
+
+print('TP: ', pl_data.filter(pl.col('output_type') == 'TP').shape[0], '\tTN: ',  pl_data.filter(pl.col('output_type') == 'TN').shape[0], '\nFN: ',  pl_data.filter(pl.col('output_type') == 'FN').shape[0],'\tFP: ', pl_data.filter(pl.col('output_type') == 'FP').shape[0])
+print(pl_data)
+
 pl_neg = pl_data.with_columns(
     pl.col('ner_tags').list.unique()
 ).filter(pl.col('ner_tags').list.len() == 1,
          pl.col('ner_tags').list.first() == 'O')
 
 # pl_neg = pl_data.filter(pl.col('tokens').list.unique() == 0)
-true_neg = pl_neg.filter(pl.col('ner_identified').list.len() == 0)
+# true_neg = pl_neg.filter(pl.col('ner_identified').list.len() == 0)
 false_neg = pl_neg.filter(pl.col('ner_identified').list.len() != 0)
-print(f"TN: {true_neg.shape[0]}\nFP: {false_neg.shape[0]}")
+print(f"FP: {false_neg.shape[0]}")
 
+
+false_neg.to_pandas().to_csv('./falseneg.csv')
 
 
 
@@ -56,6 +83,7 @@ def get_true_pos(list_gt:list, list_predicted:list):
     return 0
 
 def check_positive_match(list_bool_tags, list_tokens, list_ners):
+    # print(list_bool_tags, list_tokens, list_ners)
     ner_true = []
     if len(list_bool_tags) == len(list_tokens):
         for idx, i in enumerate(list_bool_tags):
@@ -68,10 +96,14 @@ def check_positive_match(list_bool_tags, list_tokens, list_ners):
     elif len(list_bool_tags) == len(list_tokens) + 2:
         for idx, i in enumerate(list_bool_tags):
             if i != 'O':
-                if (list_tokens[idx] == 'domestic') and ('servant' in list_tokens[idx+1]):
-                    ner_true.append(f'{list_tokens[idx-2]} {list_tokens[idx - 1]}')
-                elif (list_tokens[idx] != 'servants'):
-                    ner_true.append(list_tokens[idx-2])
+                try:
+                    if (list_tokens[idx] == 'domestic') and ('servant' in list_tokens[idx+1]):
+                        ner_true.append(f'{list_tokens[idx-2]} {list_tokens[idx - 1]}')
+                    elif (list_tokens[idx] != 'servants'):
+                        ner_true.append(list_tokens[idx-2])
+                except:
+                    ner_true.append((list_tokens[idx-2]))
+
                 # ner_true.append(list_tokens[idx-2])
                     
     else: 
@@ -82,6 +114,8 @@ def check_positive_match(list_bool_tags, list_tokens, list_ners):
     if ner_true == list_ners:
         return {'true_count': len(ner_true), 'match_count': len(ner_true)}
     
+    # print("phase 2 pass")
+
     count = 0
     if len(ner_true) == len(list_ners):
         for i in list(range(len(ner_true))):
@@ -90,6 +124,8 @@ def check_positive_match(list_bool_tags, list_tokens, list_ners):
         
         return {'true_count': len(ner_true), 'match_count': count}
     
+    # print("phase 3 pass")
+
     print(ner_true, list_ners)
 
     return {'true_count': len(ner_true), 'match_count': len(set(ner_true) and set(list_ners))}
@@ -105,7 +141,9 @@ pl_pos = pl_pos.filter(pl.col('match_count') == 0)
 
 pl_pos.to_pandas().to_csv('./falsepos.csv')
 
-
+pl_pos = pl_pos.select(
+    pl.col(['page_ocr_text','sentence','type','tokens','ner_tags','prefix_tags','ner_identified','true_count'])
+)
 
 # pl_pos = pl_data.filter(pl.col('tokens').list.len() != 0)
 # pl_pos = pl_pos.with_columns(

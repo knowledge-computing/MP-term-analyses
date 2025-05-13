@@ -92,7 +92,9 @@ if __name__ == '__main__':
 
     dict_to_be = {}
 
-    pl_data = pl.read_csv('/home/yaoyi/pyo00005/Mapping_Prejudice/ground_truth/general_stereo/formatted/splitted/mn-anoka/test.csv')
+    county_name = 'washington'
+    # county_name = 'dakota'
+    pl_data = pl.read_csv(f'/home/yaoyi/pyo00005/Mapping_Prejudice/ground_truth/general_stereo/formatted/splitted/mn-{county_name}/test.csv')
     # pl_data = pl_data.filter(pl.col('tokens').list.len() > 0)
 
     # pl_data = pl_data[:10]
@@ -100,5 +102,5 @@ if __name__ == '__main__':
         ner_identified = pl.col('sentence').map_elements(lambda x: returning(x))
     )
 
-    with open(f'{args.output}/anoka.pkl', 'wb') as handle:
+    with open(f'{args.output}/{county_name}.pkl', 'wb') as handle:
         pickle.dump(pl_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
