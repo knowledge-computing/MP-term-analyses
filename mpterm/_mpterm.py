@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=MapWithoutReturnDtypeWarning)
 
-from mpterm import data, processing, entity_recognizer
+from mpterm import data, processing, entity_recognizer, tars_classifier
 
 from mpterm._utils import (
     DefaultLogger,
@@ -101,6 +101,33 @@ class MPTerm:
                                                     dict_line_num=self.dict_line_num, 
                                                     list_lines=self.list_lines,
                                                     dict_info=self.data_info)
+        
+    def doc_classify(self,
+                     tars_model_path:str=None) -> None:
+        """
+        Main model running entity recognition
+
+        Argument
+        : tars_model_path (str) - (optional) User defined tars model path
+        """
+        if not tars_model_path :
+            tars_model_path = './mpterm/_model/tars/best-model.pt'
+
+        int_existence = data.check_exist(tars_model_path)
+        if int_existence == -1:
+            logger.error(f"Trained NER model does not exist at path {tars_model_path}")
+            raise ValueError(f"File {tars_model_path} does not exist",
+                              "Ending program")
+
+        tars_model_abspath = os.path.abspath(tars_model_path)
+        self.tars_pipeline = tars_classifier.load_model(tars_model_abspath)
+
+        # Running document classification model
+        tars_result = tars_classifier.run_tarsmodel(tars_pipeline=self.tars_pipeline,
+                                                    input_sentence=self.list_sentences)
+        
+        # TODO: Verify if works
+        
 
     def save_output(self,) -> None:
         """
