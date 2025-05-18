@@ -23,7 +23,13 @@ def group_classify(bool_gt, bool_identified):
     if bool_gt and (not bool_identified):
         return 'FN'
 
-with open('/home/yaoyi/pyo00005/Mapping_Prejudice/logs/regular/washington.pkl', 'rb') as handle:
+def filter_gt_list(list_items, target_word='nationality'):
+    while target_word in list_items:
+        list_items.remove(target_word)
+
+    return list_items
+
+with open('/home/yaoyi/pyo00005/Mapping_Prejudice/logs/regular/dakota.pkl', 'rb') as handle:
     pl_data = pickle.load(handle)
 
 pl_data = pl_data.with_columns(
@@ -40,10 +46,10 @@ pl_data = pl_data.with_columns(
     output_type = pl.struct(pl.all()).map_elements(lambda x: group_classify(x['ground_truth'], x['identified']))
 )
 
-print(pl_data.select(pl.sum('total_tokens')))
-
 print('TP: ', pl_data.filter(pl.col('output_type') == 'TP').shape[0], '\tTN: ',  pl_data.filter(pl.col('output_type') == 'TN').shape[0], '\nFN: ',  pl_data.filter(pl.col('output_type') == 'FN').shape[0],'\tFP: ', pl_data.filter(pl.col('output_type') == 'FP').shape[0])
 print(pl_data)
+
+print(pl_data.select(pl.sum('total_tokens')))
 
 pl_neg = pl_data.with_columns(
     pl.col('ner_tags').list.unique()
@@ -82,7 +88,7 @@ def get_true_pos(list_gt:list, list_predicted:list):
 
     return 0
 
-def check_positive_match(list_bool_tags, list_tokens, list_ners):
+def check_positive_match(list_bool_tags, list_tokens, list_ners, ocr_page):
     # print(list_bool_tags, list_tokens, list_ners)
     ner_true = []
     if len(list_bool_tags) == len(list_tokens):
@@ -126,14 +132,21 @@ def check_positive_match(list_bool_tags, list_tokens, list_ners):
     
     # print("phase 3 pass")
 
-    print(ner_true, list_ners)
+    ner_true = filter_gt_list(ner_true)
+    list_ners = filter_gt_list(list_ners)
 
     return {'true_count': len(ner_true), 'match_count': len(set(ner_true) and set(list_ners))}
 
+global empty_empty_counter
+empty_empty_counter = 0
+
 pl_pos = pl_data.filter(pl.col('ner_tags').list.unique().list.len() > 1)
 pl_pos = pl_pos.with_columns(
-    tmp = pl.struct(pl.all()).map_elements(lambda x: check_positive_match(x['ner_tags'], x['tokens'], x['ner_identified']))
+    tmp = pl.struct(pl.all()).map_elements(lambda x: check_positive_match(x['ner_tags'], x['tokens'], x['ner_identified'], x['page_ocr_text']))
 ).unnest('tmp')
+
+
+
 
 print('TP:', pl_pos.select(pl.sum('match_count')).item(0, 'match_count'))
 
