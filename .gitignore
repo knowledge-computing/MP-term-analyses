@@ -3,3 +3,4 @@ ground_truth/
 logs/
 s3_data/
 */__pycache__/
+tagger/
