@@ -2,6 +2,7 @@ accelerate==1.4.0
 boto3==1.36.26
 spacy==3.8.4
 en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
+flair==0.15.1
 pandas==2.2.3
 polars==1.24.0
 pyarrow==19.0.1
