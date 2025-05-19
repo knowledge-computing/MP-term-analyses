@@ -12,21 +12,18 @@ def main(path_data:str=None, json_input:Union[str, dict]=None,
     else:
         mpterm = MPTerm(input_info=json_input,
                         dir_output=dir_output, file_output=file_output)
-    
+
     # Load data to variables
     mpterm.load_data(bool_local=bool_local)
 
-    # Run entity recogntiion
-    mpterm.entity_recog()
+    # Run document classification
+    mpterm.doc_classify()
 
-    if bool_local:
-        # Save output
-        mpterm.save_output()
-    else:
-        print(mpterm.return_output())
+    # Print classification output
+    print(mpterm.return_output(pipeline='dc'))
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Mapping Prejudice')
+    parser = argparse.ArgumentParser(description='Mapping Prejudice (document classification)')
 
     parser.add_argument('--local', default=False,
                         help='Indication if running on local', action='store_true')

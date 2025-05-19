@@ -126,9 +126,8 @@ class MPTerm:
         tars_result = tars_classifier.run_tarsmodel(tars_pipeline=self.tars_pipeline,
                                                     input_sentence=self.list_sentences)
         
-        # TODO: Verify if works
+        self.racial_doc = tars_classifier.determine_document(tars_result=tars_result)
         
-
     def save_output(self,) -> None:
         """
         Saves zooniverse output to user defined path
@@ -145,9 +144,16 @@ class MPTerm:
         data.save_file(output_data=self.dict_output, path_save=self.path_output)
         logger.info(f"Output saved to {self.path_output}")
 
-    def return_output(self,) -> dict:
+    def return_output(self,
+                      pipeline:str='er') -> dict:
         """
         Returns zooniverse output
+
+        Parameters
+        : pipeline (str): indicates if entity recognization or document classification
         """
 
-        return self.dict_output
+        if pipeline.lower() == 'er':
+            return self.dict_output
+        else:
+            return self.racial_doc
