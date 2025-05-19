@@ -12,7 +12,7 @@ pip install -r requirements.txt
 [Poetry](https://python-poetry.org/) is recommended for better dependency and envrionemtn management. To install Poetry and install dependencies:
 ```
 pip install -r poet.txt
-poetry install
+poetry install --no-root
 ```
 
 ## Usage:
