@@ -1,6 +1,6 @@
 [project]
 name = "mapping-prejudice"
-version = "0.1.0"
+version = "0.2.0"
 description = "Racial term analysis pipeline for mapping prejudice project"
 authors = [
     {name = "Jiyoon Pyo",email = "jiyoonp0228@gmail.com"}
@@ -14,9 +14,10 @@ dependencies = [
     "transformers (>=4.51.3,<5.0.0)",
     "accelerate (>=1.6.0,<2.0.0)",
     "pyarrow (>=20.0.0,<21.0.0)",
-    "spacy (>=3.8.5,<4.0.0)",
+    "spacy (>=3.8.0,<3.8.4)",
     "boto3 (>=1.38.12,<2.0.0)",
-    "en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85"
+    "en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85",
+    "flair (>=0.15.1,<0.16.0)"
 ]
 
 
