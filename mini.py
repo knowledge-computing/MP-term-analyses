@@ -46,8 +46,8 @@ pl_data = pl_data.with_columns(
     output_type = pl.struct(pl.all()).map_elements(lambda x: group_classify(x['ground_truth'], x['identified']))
 )
 
-print('TP: ', pl_data.filter(pl.col('output_type') == 'TP').shape[0], '\tTN: ',  pl_data.filter(pl.col('output_type') == 'TN').shape[0], '\nFN: ',  pl_data.filter(pl.col('output_type') == 'FN').shape[0],'\tFP: ', pl_data.filter(pl.col('output_type') == 'FP').shape[0])
-print(pl_data)
+# print('TP: ', pl_data.filter(pl.col('output_type') == 'TP').shape[0], '\tTN: ',  pl_data.filter(pl.col('output_type') == 'TN').shape[0], '\nFN: ',  pl_data.filter(pl.col('output_type') == 'FN').shape[0],'\tFP: ', pl_data.filter(pl.col('output_type') == 'FP').shape[0])
+# print(pl_data)
 
 print(pl_data.select(pl.sum('total_tokens')))
 
@@ -90,52 +90,56 @@ def get_true_pos(list_gt:list, list_predicted:list):
 
 def check_positive_match(list_bool_tags, list_tokens, list_ners, ocr_page):
     # print(list_bool_tags, list_tokens, list_ners)
-    ner_true = []
-    if len(list_bool_tags) == len(list_tokens):
-        for idx, i in enumerate(list_bool_tags):
-            if i != 'O':
-                if (list_tokens[idx] == 'domestic') and ('servant' in list_tokens[idx+1]):
-                    ner_true.append(f'{list_tokens[idx]} {list_tokens[idx + 1]}')
-                elif (list_tokens[idx] != 'servants'):
-                    ner_true.append(list_tokens[idx])
-    
-    elif len(list_bool_tags) == len(list_tokens) + 2:
-        for idx, i in enumerate(list_bool_tags):
-            if i != 'O':
-                try:
+    try:
+        ner_true = []
+        if len(list_bool_tags) == len(list_tokens):
+            for idx, i in enumerate(list_bool_tags):
+                if i != 'O':
                     if (list_tokens[idx] == 'domestic') and ('servant' in list_tokens[idx+1]):
-                        ner_true.append(f'{list_tokens[idx-2]} {list_tokens[idx - 1]}')
+                        ner_true.append(f'{list_tokens[idx]} {list_tokens[idx + 1]}')
                     elif (list_tokens[idx] != 'servants'):
-                        ner_true.append(list_tokens[idx-2])
-                except:
-                    ner_true.append((list_tokens[idx-2]))
-
-                # ner_true.append(list_tokens[idx-2])
-                    
-    else: 
-        for idx, i in enumerate(list_bool_tags):
-            if i != 'O':
-                ner_true.append(list_tokens[idx])
-            
-    if ner_true == list_ners:
-        return {'true_count': len(ner_true), 'match_count': len(ner_true)}
-    
-    # print("phase 2 pass")
-
-    count = 0
-    if len(ner_true) == len(list_ners):
-        for i in list(range(len(ner_true))):
-            if (ner_true[i] in list_ners[i]) or (list_ners[i] in ner_true[i]):
-                count += 1
+                        ner_true.append(list_tokens[idx])
         
-        return {'true_count': len(ner_true), 'match_count': count}
-    
-    # print("phase 3 pass")
+        elif len(list_bool_tags) == len(list_tokens) + 2:
+            for idx, i in enumerate(list_bool_tags):
+                if i != 'O':
+                    try:
+                        if (list_tokens[idx] == 'domestic') and ('servant' in list_tokens[idx+1]):
+                            ner_true.append(f'{list_tokens[idx-2]} {list_tokens[idx - 1]}')
+                        elif (list_tokens[idx] != 'servants'):
+                            ner_true.append(list_tokens[idx-2])
+                    except:
+                        ner_true.append((list_tokens[idx-2]))
 
-    ner_true = filter_gt_list(ner_true)
-    list_ners = filter_gt_list(list_ners)
+                    # ner_true.append(list_tokens[idx-2])
+                        
+        else: 
+            for idx, i in enumerate(list_bool_tags):
+                if i != 'O':
+                    ner_true.append(list_tokens[idx])
+                
+        if ner_true == list_ners:
+            return {'true_count': len(ner_true), 'match_count': len(ner_true)}
+        
+        # print("phase 2 pass")
 
-    return {'true_count': len(ner_true), 'match_count': len(set(ner_true) and set(list_ners))}
+        count = 0
+        if len(ner_true) == len(list_ners):
+            for i in list(range(len(ner_true))):
+                if (ner_true[i] in list_ners[i]) or (list_ners[i] in ner_true[i]):
+                    count += 1
+            
+            return {'true_count': len(ner_true), 'match_count': count}
+        
+        # print("phase 3 pass")
+
+        ner_true = filter_gt_list(ner_true)
+        list_ners = filter_gt_list(list_ners)
+        return {'true_count': len(ner_true), 'match_count': len(set(ner_true) and set(list_ners))}
+
+    except:
+        return {'true_count': 0, 'match_count': 0}
+
 
 global empty_empty_counter
 empty_empty_counter = 0
@@ -146,11 +150,13 @@ pl_pos = pl_pos.with_columns(
 ).unnest('tmp')
 
 
-
-
 print('TP:', pl_pos.select(pl.sum('match_count')).item(0, 'match_count'))
 
-pl_pos = pl_pos.filter(pl.col('match_count') == 0)
+pl_pos = pl_pos.filter(pl.col('match_count') == 0).filter(pl.col('true_count') != 0)
+
+pl_pos = pl_pos.select(
+    pl.col(['ner_identified'])
+)
 
 pl_pos.to_pandas().to_csv('./falsepos.csv')
 

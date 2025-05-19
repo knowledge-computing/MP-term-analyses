@@ -1,84 +1,51 @@
-,page_ocr_text,cov_confirmed,sentence,type,tokens,prefix_tokens,ner_tags,prefix_tags,ner_identified,ground_truth,identified,total_tokens,output_type,true_count,match_count
-0,ocr/txt/mn-washington-county/1900 T D1-29999/1900/1900_01_01_T_1164_NONE_NONE_NONE_1835510_SPLITPAGE_1.txt,True,"Lot Forty-Three (43) Block Six (6), King's Forest Hills, subject to the following restrictions: That during the period ending December 31, 1958, only a single dwelling house to be used for residential purposes only, with the usual out-buildings shall be erected on said lots; that no dwelling house shall be erected thereon except of brick, stone, cement or wood construction and any house erected of wood construction shall be either stuccoed, shingled, orsided, and if sided must be painted; that no building shall be erected on any of said lots nearer than 25 feet from the front shore line of said lots; and no outhouse shall be erected on said lots unless attached to the house erect'd thereon; that this property shall never be occupied by a colored person or persons.",race,"['Lot' 'Forty' '-' 'Three' '(' '43' ')' 'Block' 'Six' '(' '6' ')' ','
- 'King\' ""\'s"" \'Forest' 'Hills' ',' 'subject' 'to' 'the' 'following'
- 'restrictions' ':' 'That' 'during' 'the' 'period' 'ending' 'December'
- '31' ',' '1958' ',' 'only' 'a' 'single' 'dwelling' 'house' 'to' 'be'
- 'used' 'for' 'residential' 'purposes' 'only' ',' 'with' 'the' 'usual'
- 'out' '-' 'buildings' 'shall' 'be' 'erected' 'on' 'said' 'lots' ';'
- 'that' 'no' 'dwelling' 'house' 'shall' 'be' 'erected' 'thereon' 'except'
- 'of' 'brick' ',' 'stone' ',' 'cement' 'or' 'wood' 'construction' 'and'
- 'any' 'house' 'erected' 'of' 'wood' 'construction' 'shall' 'be' 'either'
- 'stuccoed' ',' 'shingled' ',' 'orsided' ',' 'and' 'if' 'sided' 'must'
- 'be' 'painted' ';' 'that' 'no' 'building' 'shall' 'be' 'erected' 'on'
- 'any' 'of' 'said' 'lots' 'nearer' 'than' '25' 'feet' 'from' 'the' 'front'
- 'shore' 'line' 'of' 'said' 'lots' ';' 'and' 'no' 'outhouse' 'shall' 'be'
- 'erected' 'on' 'said' 'lots' 'unless' 'attached' 'to' 'the'
- 'house\' ""erect\'d"" \'thereon' ';' 'that' 'this' 'property' 'shall'
- 'never' 'be' 'occupied' 'by' 'a' 'colored' 'person' 'or' 'persons' '.']","['race[SEP]Lot' 'race[SEP]Forty' 'race[SEP]-' 'race[SEP]Three'
- 'race[SEP](' 'race[SEP]43' 'race[SEP])' 'race[SEP]Block' 'race[SEP]Six'
- 'race[SEP](' 'race[SEP]6' 'race[SEP])' 'race[SEP],' 'race[SEP]King'
- ""race[SEP]'s"" 'race[SEP]Forest' 'race[SEP]Hills' 'race[SEP],'
- 'race[SEP]subject' 'race[SEP]to' 'race[SEP]the' 'race[SEP]following'
- 'race[SEP]restrictions' 'race[SEP]:' 'race[SEP]That' 'race[SEP]during'
- 'race[SEP]the' 'race[SEP]period' 'race[SEP]ending' 'race[SEP]December'
- 'race[SEP]31' 'race[SEP],' 'race[SEP]1958' 'race[SEP],' 'race[SEP]only'
- 'race[SEP]a' 'race[SEP]single' 'race[SEP]dwelling' 'race[SEP]house'
- 'race[SEP]to' 'race[SEP]be' 'race[SEP]used' 'race[SEP]for'
- 'race[SEP]residential' 'race[SEP]purposes' 'race[SEP]only' 'race[SEP],'
- 'race[SEP]with' 'race[SEP]the' 'race[SEP]usual' 'race[SEP]out'
- 'race[SEP]-' 'race[SEP]buildings' 'race[SEP]shall' 'race[SEP]be'
- 'race[SEP]erected' 'race[SEP]on' 'race[SEP]said' 'race[SEP]lots'
- 'race[SEP];' 'race[SEP]that' 'race[SEP]no' 'race[SEP]dwelling'
- 'race[SEP]house' 'race[SEP]shall' 'race[SEP]be' 'race[SEP]erected'
- 'race[SEP]thereon' 'race[SEP]except' 'race[SEP]of' 'race[SEP]brick'
- 'race[SEP],' 'race[SEP]stone' 'race[SEP],' 'race[SEP]cement'
- 'race[SEP]or' 'race[SEP]wood' 'race[SEP]construction' 'race[SEP]and'
- 'race[SEP]any' 'race[SEP]house' 'race[SEP]erected' 'race[SEP]of'
- 'race[SEP]wood' 'race[SEP]construction' 'race[SEP]shall' 'race[SEP]be'
- 'race[SEP]either' 'race[SEP]stuccoed' 'race[SEP],' 'race[SEP]shingled'
- 'race[SEP],' 'race[SEP]orsided' 'race[SEP],' 'race[SEP]and' 'race[SEP]if'
- 'race[SEP]sided' 'race[SEP]must' 'race[SEP]be' 'race[SEP]painted'
- 'race[SEP];' 'race[SEP]that' 'race[SEP]no' 'race[SEP]building'
- 'race[SEP]shall' 'race[SEP]be' 'race[SEP]erected' 'race[SEP]on'
- 'race[SEP]any' 'race[SEP]of' 'race[SEP]said' 'race[SEP]lots'
- 'race[SEP]nearer' 'race[SEP]than' 'race[SEP]25' 'race[SEP]feet'
- 'race[SEP]from' 'race[SEP]the' 'race[SEP]front' 'race[SEP]shore'
- 'race[SEP]line' 'race[SEP]of' 'race[SEP]said' 'race[SEP]lots'
- 'race[SEP];' 'race[SEP]and' 'race[SEP]no' 'race[SEP]outhouse'
- 'race[SEP]shall' 'race[SEP]be' 'race[SEP]erected' 'race[SEP]on'
- 'race[SEP]said' 'race[SEP]lots' 'race[SEP]unless' 'race[SEP]attached'
- 'race[SEP]to' 'race[SEP]the' 'race[SEP]house' ""race[SEP]erect'd""
- 'race[SEP]thereon' 'race[SEP];' 'race[SEP]that' 'race[SEP]this'
- 'race[SEP]property' 'race[SEP]shall' 'race[SEP]never' 'race[SEP]be'
- 'race[SEP]occupied' 'race[SEP]by' 'race[SEP]a' 'race[SEP]colored'
- 'race[SEP]person' 'race[SEP]or' 'race[SEP]persons' 'race[SEP].']","['O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'B-race' 'O' 'O' 'O' 'O']","['0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '1' '0' '0' '0' '0']",['colored'],True,True,156,TP,1,0
-1,ocr/txt/mn-washington-county/1900 A DEEDS B121-160/1900/1900_01_01_A_NONE_DEED_136_586_2500789_SPLITPAGE_2.txt,True,"Signed, sealed and delivered Warren Smadbeck (SEAL) in the presence of:.55 Devereaux E. Smadbeck (SEAL) A. Henderson INTERNAL M. Marquette REVENUE STAMP AFRICAN STATE OF NEW YORK )",race,"['Signed' ',' 'sealed' 'and' 'delivered' 'Warren' 'Smadbeck' '(' 'SEAL'
- ')' 'in' 'the' 'presence' 'of:.55' 'Devereaux' 'E.' 'Smadbeck' '(' 'SEAL'
- ')' 'A.' 'Henderson' 'INTERNAL' 'M.' 'Marquette' 'REVENUE' 'STAMP'
- 'AFRICAN' 'STATE' 'OF' 'NEW' 'YORK' ')']","['race[SEP]Signed' 'race[SEP],' 'race[SEP]sealed' 'race[SEP]and'
- 'race[SEP]delivered' 'race[SEP]Warren' 'race[SEP]Smadbeck' 'race[SEP]('
- 'race[SEP]SEAL' 'race[SEP])' 'race[SEP]in' 'race[SEP]the'
- 'race[SEP]presence' 'race[SEP]of:.55' 'race[SEP]Devereaux' 'race[SEP]E.'
- 'race[SEP]Smadbeck' 'race[SEP](' 'race[SEP]SEAL' 'race[SEP])'
- 'race[SEP]A.' 'race[SEP]Henderson' 'race[SEP]INTERNAL' 'race[SEP]M.'
- 'race[SEP]Marquette' 'race[SEP]REVENUE' 'race[SEP]STAMP'
- 'race[SEP]AFRICAN' 'race[SEP]STATE' 'race[SEP]OF' 'race[SEP]NEW'
- 'race[SEP]YORK' 'race[SEP])']","['O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O'
- 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'O' 'B-race' 'O' 'O' 'O' 'O' 'O']","['0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0' '0'
- '0' '0' '0' '0' '0' '0' '0' '0' '0' '1' '0' '0' '0' '0' '0']",[],True,False,33,FN,1,0
+,ner_identified
+0,['shall be']
+1,['nationality']
+2,[]
+3,[]
+4,[]
+5,[]
+6,[]
+7,['domestic servants']
+8,[]
+9,[]
+10,['shall']
+11,"['of the Mong' 'ian races, or']"
+12,[]
+13,[]
+14,[]
+15,[]
+16,[]
+17,[]
+18,[]
+19,[]
+20,[]
+21,[]
+22,[]
+23,[]
+24,[]
+25,['esucasian' 'domestic']
+26,[]
+27,[]
+28,[]
+29,['shall']
+30,[]
+31,[]
+32,[]
+33,[]
+34,[]
+35,[]
+36,['colored']
+37,[]
+38,['on the']
+39,[]
+40,['on map marked Exhibit']
+41,['colored']
+42,['colored']
+43,[]
+44,[]
+45,[]
+46,[]
+47,[]
+48,['map']
+49,[]
