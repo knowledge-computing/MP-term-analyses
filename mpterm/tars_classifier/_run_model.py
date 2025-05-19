@@ -30,10 +30,10 @@ def run_tarsmodel(tars_pipeline,
     : input_sentence (str | List(str)): sentence(s) to run DC on
 
     Output
-    : list_output (list(str)): 
+    : dict_output (dict[str, str]): Output indicating if the sentence has racial restriction or not
     """
     
-    list_output = {}
+    dict_output = {}
     if not isinstance(input_sentence, list):
         list_input = [input_sentence]
     else:
@@ -45,6 +45,6 @@ def run_tarsmodel(tars_pipeline,
         tars_pipeline.predict(sentence)
 
         # Run TARS pipeline
-        list_output[res] = str(sentence.get_label().value)
+        dict_output[res] = str(sentence.get_label().value)
     
-    return list_output
+    return dict_output

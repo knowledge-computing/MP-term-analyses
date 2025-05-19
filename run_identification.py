@@ -16,7 +16,7 @@ def main(path_data:str=None, json_input:Union[str, dict]=None,
     # Load data to variables
     mpterm.load_data(bool_local=bool_local)
 
-    # Run entity recogntiion
+    # Run entity recognition
     mpterm.entity_recog()
 
     if bool_local:
@@ -26,7 +26,7 @@ def main(path_data:str=None, json_input:Union[str, dict]=None,
         print(mpterm.return_output())
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Mapping Prejudice')
+    parser = argparse.ArgumentParser(description='Mapping Prejudice (entity identification)')
 
     parser.add_argument('--local', default=False,
                         help='Indication if running on local', action='store_true')
