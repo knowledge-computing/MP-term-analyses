@@ -130,7 +130,7 @@ def get_prediction_label(str_sentence):
     sentence = Sentence(str_sentence)
     tars.predict(sentence)
 
-    return str(sentence.get_label().value)
+    return str(sentence.get_label().value), float(sentence.get_label().score)
 
 def tf_exist(list_tags):
     if "1" in list_tags:
@@ -148,26 +148,26 @@ def compare_predict_true(prediction, truth):
     elif (prediction == 'NOPE') and (truth == 'NOPE'):
         return 'TN'
 
-pl_data = pl.read_csv('/home/yaoyi/pyo00005/Mapping_Prejudice/ground_truth/general_stereo/formatted/splitted/mn-dakota/test.csv').with_columns(
-    pl.col('prefix_tags').str.strip_chars('[]').str.split(' '),
-    predicted_label = pl.col('sentence').map_elements(lambda x: get_prediction_label(x))
-).with_columns(
-    tmp = pl.col('prefix_tags').map_elements(lambda x: tf_exist(x))
-)
+# pl_data = pl.read_csv('/home/yaoyi/pyo00005/Mapping_Prejudice/ground_truth/general_stereo/formatted/splitted/mn-dakota/test.csv').with_columns(
+#     pl.col('prefix_tags').str.strip_chars('[]').str.split(' '),
+#     predicted_label = pl.col('sentence').map_elements(lambda x: get_prediction_label(x))
+# ).with_columns(
+#     tmp = pl.col('prefix_tags').map_elements(lambda x: tf_exist(x))
+# )
 
-with open('./testing.pkl', 'wb') as handle:
-    pickle.dump(pl_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    # pl_data = pickle.load(handle)
+# with open('./testing.pkl', 'wb') as handle:
+#     pickle.dump(pl_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
+#     # pl_data = pickle.load(handle)
 
-pl_data = pl_data.with_columns(
-    output_result = pl.struct(pl.all()).map_elements(lambda x: compare_predict_true(x['predicted_label'], x['tmp']))
-)
-print(pl_data)
+# pl_data = pl_data.with_columns(
+#     output_result = pl.struct(pl.all()).map_elements(lambda x: compare_predict_true(x['predicted_label'], x['tmp']))
+# )
+# print(pl_data)
 
-# sentence = Sentence("""the depresents shall and not the be location required unload the FL prior who to_said shall Covenant""")
-# tars.predict(sentence)
-# print(sentence.get_label().value)
+sentence = Sentence("""no one other than of caucasian race can occupy this property""")
+tars.predict(sentence)
+print(sentence.get_label().value)
 
 
-print(f"TP: {pl_data.filter(pl.col('output_result') == 'TP').shape[0]}\nFN: {pl_data.filter(pl.col('output_result') == 'FN').shape[0]}\nTN: {pl_data.filter(pl.col('output_result') == 'TN').shape[0]}\nFP: {pl_data.filter(pl.col('output_result') == 'FP').shape[0]}")
+# print(f"TP: {pl_data.filter(pl.col('output_result') == 'TP').shape[0]}\nFN: {pl_data.filter(pl.col('output_result') == 'FN').shape[0]}\nTN: {pl_data.filter(pl.col('output_result') == 'TN').shape[0]}\nFP: {pl_data.filter(pl.col('output_result') == 'FP').shape[0]}")
 # print(pl_data)
